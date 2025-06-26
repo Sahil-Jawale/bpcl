@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewData["Title"] - GRCAuthServicesMVC</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/GRCAuthServicesMVC.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+</head>
+<body class="bg-light">
+
+    <header>
+        <style>
+            .navbar-bpcl {
+                background-color: #017DC5; /* Primary BPCL Blue */
+            }
+
+                .navbar-bpcl .navbar-brand,
+                .navbar-bpcl .nav-link,
+                .navbar-bpcl .dropdown-menu a {
+                    color: #ffffff !important;
+                    font-weight: 500;
+                }
+
+                    .navbar-bpcl .nav-link.active,
+                    .navbar-bpcl .nav-link:hover,
+                    .navbar-bpcl .dropdown-menu a:hover {
+                        color: #FFD500 !important; /* Yellow on hover */
+                    }
+
+                .navbar-bpcl .dropdown-menu {
+                    background-color: #002F6C; /* Dark Blue */
+                }
+
+            .navbar-toggler {
+                border-color: #FFD500;
+            }
+
+            .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23FFD500' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            }
+
+            .footer-bpcl {
+                background-color: #0067a3; /* BPCL Dark Blue */
+                color: #ffffff;
+                font-weight: 400;
+            }
+
+                .footer-bpcl a {
+                    color: #FFD500;
+                    text-decoration: none;
+                }
+
+                    .footer-bpcl a:hover {
+                        color: #ffffff;
+                        text-decoration: underline;
+                    }
+
+
+        </style>
+
+        <nav class="navbar navbar-expand-xxl navbar-bpcl shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="@Url.Content("~/Images/download.png")" alt="Logo" style="height: 40px; width: auto;" />
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
+                        aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarMain">
+                    <ul class="navbar-nav me-auto mb-2 mb-xxl-0">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Features
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationInventory">Application Inventory Operations</a></li>
+                                <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationRole">Application Role Operations</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="ApplicationInventory">Application Inventory</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Home" asp-action="ApplicationRole">Application Roles</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+    </header>
+
+    <div class="container my-4">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="footer mt-auto py-3 footer-bpcl">
+        <div class="container d-flex justify-content-between flex-wrap">
+            <span>&copy; 2025 - GRCAuthServicesMVC</span>
+            <span>
+                <a asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </span>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

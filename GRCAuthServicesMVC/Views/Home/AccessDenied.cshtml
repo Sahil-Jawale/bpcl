@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+    
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>403 - Access Denied</title>
+    <style>
+        body {
+            background-color: #fff0f1;
+            color: #212529;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .error-container {
+            text-align: center;
+            background: #ffe3e6;
+            border: 2px solid #f5c2c7;
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 600px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .error-code {
+            font-size: 100px;
+            font-weight: bold;
+            color: #c82333;
+            margin: 0;
+        }
+
+        .error-message {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .error-detail {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #6c757d;
+        }
+
+        a.btn-home {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #c82333;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+            a.btn-home:hover {
+                background-color: #a71d2a;
+            }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">403</div>
+        <div class="error-message">Access Denied</div>
+        <div class="error-detail">You do not have permission to view this page or perform this action.</div>
+        <a href="/" class="btn-home">Return to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace GRCAuthServicesMVC.Models.DTO
+{
+    public class ApplicationRoleRepository
+    {
+       
+        public int RoleId { get; set; }
+
+        [StringLength(6)]
+        [Unicode(false)]
+        public string ApplicationId { get; set; } = null!;
+
+        [Column("ApplicationRole")]
+        [StringLength(30)]
+        [Unicode(false)]
+        public string? ApplicationRole1 { get; set; }
+
+        [StringLength(50)]
+        [Unicode(false)]
+        public string BusinessRole { get; set; } = null!;
+
+        [StringLength(50)]
+        [Unicode(false)]
+        public string? AppAuthObject { get; set; }
+
+        [StringLength(1)]
+        [Unicode(false)]
+        public string ActiveStatus { get; set; } = null!;
+
+        [Column(TypeName = "datetime")]
+        public DateTime UpdatedOn { get; set; }
+
+        public int? UpdatedBy { get; set; }
+
+        public ApplicationRole FormData { get; set; } = new ApplicationRole();
+        public List<ApplicationRole> Roles { get; set; } = new List<ApplicationRole>();
+    }
+}
