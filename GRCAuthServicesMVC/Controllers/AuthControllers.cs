@@ -1,5 +1,5 @@
 ﻿using GRCAuthServicesMVC.Models.DTO;
-using GRCAuthServicesMVC.Repositories;
+using GRCAuthServicesMVC.Views.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

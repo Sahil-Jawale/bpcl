@@ -1,5 +1,6 @@
 ﻿using GRCAuthServicesMVC.Models;
 using GRCAuthServicesMVC.ViewModels;
+using GRCAuthServicesMVC.Views.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -34,6 +35,7 @@ namespace GRCAuthServicesMVC.Repositories
         {
             if (action == "add")
             {
+                appInventory.AppInvId = 0;
                 _context.ApplicationInventories.Add(appInventory);
             }
             else if (action == "edit")

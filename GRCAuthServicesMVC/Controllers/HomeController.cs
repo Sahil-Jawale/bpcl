@@ -1,7 +1,6 @@
 using System;
 using System.Diagnostics;
 using GRCAuthServicesMVC.Models;
-using GRCAuthServicesMVC.Repositories;
 using GRCAuthServicesMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -10,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using GRCAuthServicesMVC.Models.DTO;
 using Microsoft.AspNetCore.Authorization;
+using GRCAuthServicesMVC.Views.Repositories;
 
 namespace GRCAuthServicesMVC.Controllers
 {

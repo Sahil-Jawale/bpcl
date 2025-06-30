@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using GRCAuthServicesMVC.Repositories;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using GRCAuthServicesMVC.Views.Repositories;
 
 namespace GRCAuthServicesMVC.Controllers
 {

@@ -2,7 +2,7 @@
 using GRCAuthServicesMVC.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GRCAuthServicesMVC.Repositories
+namespace GRCAuthServicesMVC.Views.Repositories
 {
     public interface IApplicationRole
     {

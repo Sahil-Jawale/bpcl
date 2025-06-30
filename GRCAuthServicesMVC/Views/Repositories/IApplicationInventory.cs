@@ -1,6 +1,6 @@
 ﻿using GRCAuthServicesMVC.Models;
 
-namespace GRCAuthServicesMVC.Repositories
+namespace GRCAuthServicesMVC.Views.Repositories
 {
     public interface IApplicationInventoryRepository
     {

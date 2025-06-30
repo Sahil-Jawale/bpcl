@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using GRCAuthServicesMVC.Models;
 using GRCAuthServicesMVC.Models.DTO;
-using GRCAuthServicesMVC.Repositories;
 using GRCAuthServicesMVC.ViewModels;
+using GRCAuthServicesMVC.Views.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

@@ -6,7 +6,8 @@ namespace GRCAuthServicesMVC.Models.DTO
 {
     public class ApplicationRoleRepository
     {
-       
+        [Key]
+        [Column("RoleId")]
         public int RoleId { get; set; }
 
         [StringLength(6)]
@@ -35,7 +36,7 @@ namespace GRCAuthServicesMVC.Models.DTO
 
         public int? UpdatedBy { get; set; }
 
-        public ApplicationRole FormData { get; set; } = new ApplicationRole();
-        public List<ApplicationRole> Roles { get; set; } = new List<ApplicationRole>();
+        //public ApplicationRole FormData { get; set; } = new ApplicationRole();
+        //public List<ApplicationRole> Roles { get; set; } = new List<ApplicationRole>();
     }
 }

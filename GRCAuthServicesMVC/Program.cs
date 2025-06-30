@@ -10,6 +10,7 @@ using System.Text;
 using GRCAuthServicesMVC.Data;
 using Microsoft.AspNetCore.Identity;
 using GRCAuthServicesMVC.Controllers;
+using GRCAuthServicesMVC.Views.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

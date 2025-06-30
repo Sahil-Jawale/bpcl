@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace GRCAuthServicesMVC.Repositories
+namespace GRCAuthServicesMVC.Views.Repositories
 {
     public interface ITokenRepo
     {

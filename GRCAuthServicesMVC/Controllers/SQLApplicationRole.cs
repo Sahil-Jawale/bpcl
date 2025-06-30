@@ -1,4 +1,5 @@
 ﻿using GRCAuthServicesMVC.Models;
+using GRCAuthServicesMVC.Views.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace GRCAuthServicesMVC.Repositories
@@ -30,6 +31,7 @@ namespace GRCAuthServicesMVC.Repositories
         {
             if (action == "add")
             {
+                appRole.RoleId = 0;
                 appDbContext.ApplicationRoles.Add(appRole);
             }
             else if (action == "edit")
@@ -165,7 +167,7 @@ namespace GRCAuthServicesMVC.Repositories
 
                     case "activestatus":
                         query = query.Where(x => x.ActiveStatus.Contains(filterQuery));
-                        break;
+                        break;                  
                 }
             }
 
