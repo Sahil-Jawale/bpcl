@@ -11,6 +11,7 @@ namespace GRCAuthServicesMVC.Controllers
 {
 
     //[Authorize(Roles = "Admin")]
+    [Route("ApplicationInventory")]
     public class ApplicationInventoryController : Controller
     {
         private readonly ILogger<ApplicationInventoryController> logger;
@@ -33,6 +34,16 @@ namespace GRCAuthServicesMVC.Controllers
             this.mapper = mapper;
         }
 
+
+
+        public IActionResult EditApplicationInventory()
+        {   
+            return View();
+        }
+
+       
+       
+
         public IActionResult ApplicationInventory()
         {
             var entities = appDbContext.ApplicationInventories.ToList();
@@ -49,6 +60,7 @@ namespace GRCAuthServicesMVC.Controllers
         }
 
         [HttpPost]
+        [Route("AddInventory")]
         public async Task<IActionResult> AddInventory(ApplicationInventoryRepository appInventory)
         {
             if (!ModelState.IsValid)
@@ -58,7 +70,7 @@ namespace GRCAuthServicesMVC.Controllers
             {
                 var domainModel = mapper.Map<ApplicationInventory>(appInventory);
                 await repository.AddInventoryAsync(domainModel);
-                return RedirectToAction("GetAll");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -68,7 +80,8 @@ namespace GRCAuthServicesMVC.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(string? FilterOn, string? filterQuery, int pagenumber = 1, int pagesize = 10)
+        [Route("")]
+        public async Task<IActionResult> Index(string? FilterOn, string? filterQuery, int pagenumber = 1, int pagesize = 10)
         {
             var domainData = await repository.GetAllAsync(FilterOn, filterQuery, pagenumber, pagesize);
             if (domainData == null)
@@ -91,7 +104,18 @@ namespace GRCAuthServicesMVC.Controllers
             return View("~/Views/Home/ApplicationInventory.cshtml", viewModel);
         }
 
+
+        [HttpGet]
+        [Route("Add")]
+
+        public IActionResult AddApplicationInventory()
+        {
+            return View("~/Views/Home/AddApplicationInventory.cshtml"); // or wherever your add form view is
+        }
+
+
         [HttpPost]
+        [Route("AddOrUpdate")]
         public async Task<IActionResult> AddOrUpdate(ApplicationInventoryRepository appInventory, string action)
         {
             if (!ModelState.IsValid)
@@ -109,7 +133,7 @@ namespace GRCAuthServicesMVC.Controllers
             {
                 var domainModel = mapper.Map<ApplicationInventory>(appInventory);
                 await repository.AddOrUpdateAsync(domainModel, action);
-                return RedirectToAction("GetAll");
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
@@ -117,5 +141,42 @@ namespace GRCAuthServicesMVC.Controllers
                 return BadRequest("An error occurred: " + ex.Message);
             }
         }
+
+
+        [HttpGet]
+        [Route("EditApplicationInventory/{id}")]
+        public async Task<IActionResult> EditApplicationInventory(int id)
+        {
+            try
+            {
+                var domainModel = await repository.GetByIdAsync(id); // Fetch from DB
+
+                if (domainModel == null)
+                {
+                    return NotFound();
+                }
+
+                // Map domain model to repository/ViewModel object
+                var viewModel = mapper.Map<ApplicationInventoryRepository>(domainModel);
+
+                // Pass it into ApplicationInventoryViewModel which the View expects
+                var wrapperViewModel = new ApplicationInventoryViewModel
+                {
+                    //ApplicationInventory = viewModel,
+                    ApplicationInventoryList = new List<ApplicationInventoryRepository>(), // optional
+                    CurrentPage = 1,
+                    TotalPages = 1
+                };
+
+                return View("~/Views/Home/EditApplicationInventory.cshtml", viewModel);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, "Failed to load data for editing AppInvId: {AppInvId}", id);
+                return BadRequest("Unable to load application inventory for editing.");
+            }
+        }
+
+
     }
 }

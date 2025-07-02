@@ -56,39 +56,7 @@ namespace GRCAuthServicesMVC.Repositories
             return appRole;
         }
 
-        //public async Task<IEnumerable<ApplicationRole>> GetAllRoles(string? FilterOn = null, string? filterQuery = null)
-        //{
-        //    IQueryable<ApplicationRole> query = appDbContext.ApplicationRoles.AsQueryable();
-
-        //    if (!string.IsNullOrWhiteSpace(FilterOn) && !string.IsNullOrWhiteSpace(filterQuery))
-        //    {
-        //        switch (FilterOn.Trim().ToLower())
-        //        {
-        //            case "applicationid":
-        //                query = query.Where(x => x.ApplicationId.Contains(filterQuery));
-        //                break;
-
-        //            case "applicationrole1":  // property ApplicationRole1 maps to column ApplicationRole
-        //                query = query.Where(x => x.ApplicationRole1 != null && x.ApplicationRole1.Contains(filterQuery));
-        //                break;
-
-        //            case "businessrole":
-        //                query = query.Where(x => x.BusinessRole.Contains(filterQuery));
-        //                break;
-
-        //            case "appauthobject":
-        //                query = query.Where(x => x.AppAuthObject != null && x.AppAuthObject.Contains(filterQuery));
-        //                break;
-
-        //            case "activestatus":
-        //                query = query.Where(x => x.ActiveStatus.Contains(filterQuery));
-        //                break;
-        //        }
-        //    }
-
-        //    return await query.ToListAsync();
-
-        //}
+        
 
         public async Task<IEnumerable<ApplicationRole>> GetAllAsync(
     string? FilterOn = null,

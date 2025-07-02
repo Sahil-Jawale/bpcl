@@ -5,6 +5,7 @@ using GRCAuthServicesMVC.ViewModels;
 using GRCAuthServicesMVC.Views.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GRCAuthServicesMVC.Controllers
 {
@@ -28,8 +29,35 @@ namespace GRCAuthServicesMVC.Controllers
             this.mapper = mapper;
         }
 
+        [HttpGet]
+        [Route("AddRole")]
 
+        public IActionResult AddApplicationRole()
+        {
+            var allAppIds = appDbContext.ApplicationRoles
+              .Select(r => r.ApplicationId)
+              .Distinct()
+              .ToList() ?? new List<string>();
 
+            var viewModel = new ApplicationRoleViewModel
+            {
+                ApplicationIds = allAppIds
+            };
+
+            return View("~/Views/Home/AddApplicationRole.cshtml", viewModel);
+        }
+        //    return View("~/Views/Home/AddApplicationRole.cshtml"); // or wherever your add form view is
+        //}
+
+        public IActionResult AddApplicationInventory()
+        {
+            return View();
+        }
+        //public IActionResult AddApplicationInvetory()
+        //{
+
+        //    return View();
+        //}
 
 
         [HttpGet]
@@ -73,105 +101,6 @@ namespace GRCAuthServicesMVC.Controllers
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> AddOrUpdateRoles( ApplicationRoleRepository appRole, string action)
-        //{
-        //    var DomainModel = mapper.Map<ApplicationRole>(appRole);
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(appRole);
-        //    }
-
-        //    try
-        //    {
-        //        await roleRepo.AddOrUpdateRoles(DomainModel, action);
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex, "Failed to add or update role.");
-        //        return BadRequest("An error occurred");
-        //    }
-        //}
-
-        [HttpPost]
-        //public async Task<IActionResult> AddOrUpdateRoles(ApplicationRoleRepository appRole, string action)
-        //{
-        //    var domainModel = mapper.Map<ApplicationRole>(appRole);
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        // Prepare the view model expected by the form view
-        //        var roles = await roleRepo.GetAllAsync(null, null, 1, 10);
-        //        var rolesDto = mapper.Map<List<ApplicationRoleRepository>>(roles);
-
-        //        var viewModel = new ApplicationRoleViewModel
-        //        {
-        //            FormData = new ApplicationRoleRepository(),
-        //            Roles = rolesDto,
-        //            CurrentPage = 1,
-        //            TotalPages = 1
-        //        };
-
-
-        //        // Return the form view explicitly with the full view model
-        //        return View("~/Views/Home/ApplicationRole.cshtml", viewModel);
-        //    }
-
-        //    try
-        //    {
-        //        await roleRepo.AddOrUpdateRoles(domainModel, action);
-        //        return RedirectToAction("GetAllRoles"); // Redirect to your list page or index
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex, "Failed to add or update role.");
-        //        return BadRequest("An error occurred");
-        //    }
-        //}
-
-        //[HttpPost]
-        //public async Task<IActionResult> AddOrUpdateRoles(ApplicationRoleRepository appRole, string action)
-        //{
-        //    logger.LogInformation($"Action: {action}, RoleId: {appRole.RoleId}");
-        //    logger.LogInformation($"Form Submitted. Action: {action}, RoleId: {appRole.RoleId}");
-
-
-
-
-        //    // Default updated time if missing
-        //    //if (domainModel.UpdatedOn == default)
-        //    //    domainModel.UpdatedOn = DateTime.UtcNow;
-
-        //    if (!ModelState.IsValid)
-        //    {
-        //        var roles = await roleRepo.GetAllAsync(null, null, 1, 10);
-        //        var rolesDto = mapper.Map<List<ApplicationRoleRepository>>(roles);
-
-        //        var viewModel = new ApplicationRoleViewModel
-        //        {
-        //            FormData = appRole,
-        //            Roles = rolesDto,
-        //            CurrentPage = 1,    
-        //            TotalPages = 1
-        //        };
-
-        //        return View("~/Views/Home/ApplicationRole.cshtml", viewModel);
-        //    }
-
-        //    try
-        //    {
-        //        var domainModel = mapper.Map<ApplicationRole>(appRole);
-        //        await roleRepo.AddOrUpdateRoles(domainModel, action.ToLower());
-        //        return RedirectToAction("GetAllRoles");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex, "Error adding/updating role.");
-        //        return BadRequest("Update failed.");
-        //    }
-        //}
 
         [HttpPost]
         public async Task<IActionResult> AddOrUpdateRoles( ApplicationRoleViewModel model, string action)
@@ -236,6 +165,20 @@ namespace GRCAuthServicesMVC.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditApplicationRole(int id)
+        {
+            var role = await appDbContext.ApplicationRoles.FindAsync(id);
+            if (role == null)
+                return NotFound();
+
+            ViewBag.ApplicationIds = await appDbContext.ApplicationInventories
+                .Select(a => a.ApplicationId)
+                .Distinct()
+                .ToListAsync();
+
+            return View("~/Views/Home/EditApplicationRole.cshtml", role);
+        }
 
 
 

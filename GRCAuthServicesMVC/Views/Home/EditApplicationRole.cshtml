@@ -1,0 +1,80 @@
+﻿@model GRCAuthServicesMVC.Models.ApplicationRole
+
+@{
+    ViewData["Title"] = "Edit Application Role";
+    var applicationIds = ViewBag.ApplicationIds as List<string> ?? new List<string>();
+}
+
+<style>
+    .bpcl-header {
+        background-color: #002F6C;
+        color: white;
+    }
+</style>
+
+<main class="container my-5">
+    <div class="card shadow">
+        <div class="card-header bpcl-header">
+            <h4 class="mb-0">Edit Application Role</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" asp-controller="ApplicationRole" asp-action="AddOrUpdateRoles">
+                <input type="hidden" name="FormData.RoleId" value="@Model.RoleId" />
+
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label for="ApplicationId" class="form-label">Application ID</label>
+                        <select class="form-select" id="ApplicationId" name="FormData.ApplicationId" required>
+                            <option value="">-- Select Application ID --</option>
+                            @foreach (var id in applicationIds)
+                            {
+                                <option value="@id" selected="@(Model.ApplicationId == id)">
+                                    @id
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="ApplicationRole1" class="form-label">Application Role</label>
+                        <input type="text" class="form-control" id="ApplicationRole1" name="FormData.ApplicationRole1"
+                               value="@Model.ApplicationRole1" placeholder="Enter Application Role" required />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="BusinessRole" class="form-label">Business Role</label>
+                        <input type="text" class="form-control" id="BusinessRole" name="FormData.BusinessRole"
+                               value="@Model.BusinessRole" placeholder="Enter Business Role" required />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="ActiveStatus" class="form-label">Active Status</label>
+                        <select class="form-select" id="ActiveStatus" name="FormData.ActiveStatus" required>
+                            <option value="">-- Select Status --</option>
+                            <option value="Y" selected="@(Model.ActiveStatus == "Y")">Active</option>
+                            <option value="N" selected="@(Model.ActiveStatus == "N")">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="UpdatedBy" class="form-label">Updated By</label>
+                        <input type="text" class="form-control" id="UpdatedBy" name="FormData.UpdatedBy"
+                               value="@Model.UpdatedBy" required placeholder="Enter User ID" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="UpdatedOn" class="form-label">Updated On</label>
+                        <input type="datetime-local" class="form-control" id="UpdatedOn" name="FormData.UpdatedOn"
+                               value="@Model.UpdatedOn.ToString("yyyy-MM-ddTHH:mm")" required />
+                    </div>
+
+                </div>
+
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-success px-4" name="action" value="edit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

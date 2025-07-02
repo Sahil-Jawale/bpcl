@@ -64,8 +64,12 @@
 
         <nav class="navbar navbar-expand-xxl navbar-bpcl shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                @* <a class="navbar-brand" asp-action="Index">
                     <img src="@Url.Content("~/Images/download.png")" alt="Logo" style="height: 40px; width: auto;" />
+                </a> *@
+
+                <a class="navbar-brand" asp-action="Index">
+                    <img src="@Url.Content("~/Images/English Logo.jpg")" alt="Logo" style="height: 40px; width: auto;" />
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain"
@@ -79,9 +83,9 @@
                             <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            @* <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Features
-                            </a>
+                            </a> *@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationInventory">Application Inventory Operations</a></li>
                                 <li><a class="dropdown-item" asp-controller="Home" asp-action="ApplicationRole">Application Role Operations</a></li>

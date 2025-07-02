@@ -9,67 +9,31 @@
             .bpcl-header {
                 background-color: #002F6C;
                 color: white;
+
             }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: #fff;
+    }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
         </style>
 
-        <main class="container my-5">
-            <div class="card shadow">
-                <div class="card-header bpcl-header">
-                    <h4 class="mb-0">Application Roles Form</h4>
-                </div>
-                <div class="card-body">
-                    <form method="post" asp-controller="ApplicationRole" asp-action="AddOrUpdateRoles">
-                        @Html.AntiForgeryToken()
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <label asp-for="FormData.RoleId" class="form-label"></label>
-                                <input asp-for="FormData.RoleId" class="form-control" placeholder="Enter Role ID" />
-                            </div>
-                            <div class="col-md-4">
-                                <label asp-for="FormData.ApplicationId" class="form-label"></label>
-                                <input asp-for="FormData.ApplicationId" class="form-control" placeholder="Enter Application ID" />
-                            </div>
-                            <div class="col-md-4">
-                                <label asp-for="FormData.ApplicationRole1" class="form-label"></label>
-                                <input asp-for="FormData.ApplicationRole1" class="form-control" placeholder="Enter Application Role" />
-                            </div>
-                            <div class="col-md-4">
-                                <label asp-for="FormData.BusinessRole" class="form-label"></label>
-                                <input asp-for="FormData.BusinessRole" class="form-control" placeholder="Enter Business Role" />
-                            </div>
-                            <div class="col-md-4">
-                                <label asp-for="FormData.ActiveStatus" class="form-label"></label>
-                                <select asp-for="FormData.ActiveStatus" class="form-select">
-                                    <option value="">-- Select Status --</option>
-                                    <option value="Y">Active</option>
-                                    <option value="N">Inactive</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label asp-for="FormData.UpdatedBy" class="form-label"></label>
-                                <input asp-for="FormData.UpdatedBy" class="form-control" placeholder="Enter User ID" />
-                            </div>
-                            <div class="col-md-4">
-                                <label asp-for="FormData.UpdatedOn" class="form-label"></label>
-                                <input asp-for="FormData.UpdatedOn" type="datetime-local" class="form-control" placeholder="Select date and time" />
-                            </div>
-                        </div>
-                        <div class="mt-4 text-end">
-                            <button type="submit" class="btn btn-success px-4" name="action" value="add">Add</button>
-                            <button type="submit" class="btn btn-success px-4" name="action" value="edit">Edit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </main>
+   
 
-        <hr>
+<div class="mt-5">
+    <div class="d-flex gap-2 mb-3">
+        <form method="get" asp-controller="ApplicationRole" asp-action="GetAllRoles" class="mb-0">
+            <button type="submit" class="btn btn-primary ">Get All Roles</button>
+        </form>
 
-        <div class="mt-5">
-            <form method="get" asp-controller="ApplicationRole" asp-action="GetAllRoles">
-                <button type="submit" class="btn btn-primary mb-3">Get All Roles</button>
-            </form>
-
+        <a class="btn btn-success px-4" asp-controller="ApplicationRole" asp-action="AddApplicationRole">Add</a>
+    </div>
             @if (Model?.Roles?.Any() == true)
             {
                 <div class="table-responsive">
@@ -110,6 +74,7 @@
                                 <th>Status</th>
                                 <th>Updated By</th>
                                 <th>Updated On</th>
+                        <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -123,6 +88,7 @@
                                     <td>@role.ActiveStatus</td>
                                     <td>@role.UpdatedBy</td>
                                     <td>@role.UpdatedOn.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td><a asp-action="EditApplicationRole" name="edit" asp-route-id="@role.RoleId" class="btn btn-sm btn-danger">Edit</a></td>
                                 </tr>
                             }
                         </tbody>
