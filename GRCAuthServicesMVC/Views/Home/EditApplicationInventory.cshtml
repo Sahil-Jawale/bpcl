@@ -1,0 +1,70 @@
+﻿@model GRCAuthServicesMVC.Models.DTO.ApplicationInventoryRepository
+
+@{
+    ViewData["Title"] = "Edit Application Inventory";
+}
+
+<style>
+    .bpcl-header {
+        background-color: #002F6C;
+        color: white;
+    }
+</style>
+
+<main class="container my-5">
+    <div class="card shadow">
+        <div class="card-header bpcl-header">
+            <h4 class="mb-0">Edit Application Inventory</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" asp-controller="ApplicationInventory" asp-action="AddOrUpdate">
+                <input type="hidden" name="AppInvId" value="@Model.AppInvId" />
+
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="ApplicationId" class="form-label">Application ID</label>
+                        <input type="text" class="form-control" id="ApplicationId" name="ApplicationId" maxlength="6"
+                               value="@Model.ApplicationId" required placeholder="Enter Application ID" />
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="ApplicationDesc" class="form-label">Application Description</label>
+                        <input type="text" class="form-control" id="ApplicationDesc" name="ApplicationDesc" maxlength="500"
+                               value="@Model.ApplicationDesc" placeholder="Enter a description of the application" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="ProcessOwner" class="form-label">Process Owner</label>
+                        <input type="text" class="form-control" id="ProcessOwner" name="ProcessOwner" maxlength="100"
+                               value="@Model.ProcessOwner" required placeholder="Enter Process Owner's name" />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="ActiveStatus" class="form-label">Active Status</label>
+                        <select class="form-select" id="ActiveStatus" name="ActiveStatus" required>
+                            <option value="">-- Select Status --</option>
+                            <option value="Y" selected="@(Model.ActiveStatus == "Y")">Active</option>
+                            <option value="N" selected="@(Model.ActiveStatus == "N")">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="UpdatedOn" class="form-label">Updated On</label>
+                        <input type="datetime-local" class="form-control" id="UpdatedOn" name="UpdatedOn"
+                               value="@Model.UpdatedOn.ToString("yyyy-MM-ddTHH:mm")" required />
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="UpdatedBy" class="form-label">Updated By (User ID)</label>
+                        <input type="number" class="form-control" id="UpdatedBy" name="UpdatedBy"
+                               value="@Model.UpdatedBy" required placeholder="Enter your User ID" />
+                    </div>
+                </div>
+
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-success px-4" name="action" value="edit">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

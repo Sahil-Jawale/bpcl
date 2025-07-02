@@ -25,12 +25,12 @@ public partial class ApplicationInventory
     [StringLength(100)]
     [Unicode(false)]
     public string ProcessOwner { get; set; } = null!;
-
-    [StringLength(1)]
-    [Unicode(false)]
     public string ActiveStatus { get; set; } = null!;
 
     [Column(TypeName = "datetime")]
+
+    [StringLength(1)]
+    [Unicode(false)]
     public DateTime UpdatedOn { get; set; }
 
     public int UpdatedBy { get; set; }

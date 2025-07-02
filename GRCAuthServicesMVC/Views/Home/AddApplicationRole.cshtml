@@ -1,0 +1,78 @@
+﻿@model GRCAuthServicesMVC.ViewModels.ApplicationRoleViewModel
+
+@{
+    ViewData["Title"] = "ApplicationRoles";
+}
+
+<style>
+    .bpcl-header {
+        background-color: #002F6C;
+        color: white;
+    }
+</style>
+
+<main class="container my-5">
+    <div class="card shadow">
+        <div class="card-header bpcl-header">
+            <h4 class="mb-0">Application Roles Form</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" asp-controller="ApplicationRole" asp-action="AddOrUpdateRoles">
+                @Html.AntiForgeryToken()
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label asp-for="FormData.ApplicationId" class="form-label">Application ID</label>
+                        <select asp-for="FormData.ApplicationId" class="form-select">
+                            <option value="">-- Select Application ID --</option>
+                            @if (Model?.ApplicationIds != null)
+                            {
+                                
+                                foreach (var id in Model.ApplicationIds)
+                                {
+                                    <option value="@id" selected="@(Model.FormData.ApplicationId == id ? "selected" : null)">
+                                        @id
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="FormData.ApplicationRole1" class="form-label">Application Role</label>
+                        <input asp-for="FormData.ApplicationRole1" class="form-control" placeholder="Enter Application Role" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="FormData.BusinessRole" class="form-label">Business Role</label>
+                        <input asp-for="FormData.BusinessRole" class="form-control" placeholder="Enter Business Role" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="FormData.ActiveStatus" class="form-label">Active Status</label>
+                        <select asp-for="FormData.ActiveStatus" class="form-select">
+                            <option value="">-- Select Status --</option>
+                            <option value="Y">Active</option>
+                            <option value="N">Inactive</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="FormData.UpdatedBy" class="form-label">Updated By</label>
+                        <input asp-for="FormData.UpdatedBy" class="form-control" placeholder="Enter User ID" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label asp-for="FormData.UpdatedOn" class="form-label">Updated On</label>
+                        <input asp-for="FormData.UpdatedOn" type="datetime-local" class="form-control" />
+                    </div>
+
+                </div>
+
+                <div class="mt-4 text-end">
+                    <button type="submit" class="btn btn-success px-4" name="action" value="add">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

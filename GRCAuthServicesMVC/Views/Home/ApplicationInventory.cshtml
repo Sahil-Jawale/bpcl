@@ -11,80 +11,38 @@
         background-color: #002F6C;
         color: white;
     }
-    </style>
 
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: #fff;
+    }
 
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
 
+</style>
 
-    <main class="container my-5">
-        <div class="card shadow">
-        <div class="card-header bpcl-header">
-                <h4 class="mb-0">Application Inventory Form</h4>
-            </div>
-            <div class="card-body">
-                <form method="post" asp-controller="ApplicationInventory" asp-action="AddOrUpdate">
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <label for="AppInvId" class="form-label">AppInvId</label>
-                            <input type="number" class="form-control" id="AppInvId" name="AppInvId" required placeholder="Enter App Inventory ID" />
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="ApplicationId" class="form-label">Application ID</label>
-                            <input type="text" class="form-control" id="ApplicationId" name="ApplicationId" maxlength="6" required placeholder="Enter Application ID" />
-                        </div>
-
-                        <div class="col-md-12">
-                            <label for="ApplicationDesc" class="form-label">Application Description</label>
-                            <input type="text" class="form-control" id="ApplicationDesc" name="ApplicationDesc" maxlength="500" placeholder="Enter a description of the application" />
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="ProcessOwner" class="form-label">Process Owner</label>
-                            <input type="text" class="form-control" id="ProcessOwner" name="ProcessOwner" maxlength="100" required placeholder="Enter Process Owner's name" />
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="ActiveStatus" class="form-label">Active Status</label>
-                            <select class="form-select" id="ActiveStatus" name="ActiveStatus" required>
-                                <option value="">-- Select Status --</option>
-                                <option value="Y">Active</option>
-                                <option value="N">Inactive</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="UpdatedOn" class="form-label">Updated On</label>
-                            <input type="datetime-local" class="form-control" id="UpdatedOn" name="UpdatedOn" required placeholder="Select last update date/time" />
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="UpdatedBy" class="form-label">Updated By (User ID)</label>
-                            <input type="number" class="form-control" id="UpdatedBy" name="UpdatedBy" required placeholder="Enter your User ID" />
-                        </div>
-                    </div>
-
-                    <div class="mt-4 text-end">
-                        <button type="submit" class="btn btn-success px-4" name="action" value="add">Add</button>
-                        <button type="submit" class="btn btn-success px-4" name="action" value="edit">Edit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <hr>
+    
+   
 
     <div class="mt-5">
-        <form method="get" asp-controller="ApplicationInventory" asp-action="GetAll">
-            <button type="submit" class="btn btn-primary mb-3">Get All Applications</button>
+    <div class="d-flex gap-2 mb-3">
+        <form method="get" asp-controller="ApplicationInventory" asp-action="Index" class="mb-0">
+            <button type="submit" class="btn btn-primary">Get All Applications</button>
         </form>
+
+        <a class="btn btn-success px-4" asp-controller="ApplicationInventory" asp-action="AddApplicationInventory">Add</a>
+    </div>
+
 
         @if (Model?.ApplicationInventoryList?.Any() == true)
         {
             <div class="table-responsive">
                 <div class="mb-3">
-                    <form method="get" asp-controller="ApplicationInventory" asp-action="GetAll" class="row g-2 align-items-center">
+                <form method="get" asp-controller="ApplicationInventory" asp-action="Index" class="row g-2 align-items-center">
                         <div class="col-auto">
                             <label for="FilterOn" class="col-form-label">Filter By:</label>
                         </div>
@@ -105,7 +63,7 @@
                             <button type="submit" class="btn btn-secondary">Search</button>
                         </div>
                         <div class="col-auto">
-                            <a href="@Url.Action("GetAll", "ApplicationInventory")" class="btn btn-outline-primary">Clear</a>
+                        <a href="@Url.Action("Index", "ApplicationInventory")" class="btn btn-outline-primary">Clear</a>
                         </div>
                     </form>
                 </div>
@@ -120,6 +78,7 @@
                             <th>Status</th>
                             <th>Updated On</th>
                             <th>Updated By</th>
+                        <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,7 +92,11 @@
                                 <td>@item.ActiveStatus</td>
                                 <td>@item.UpdatedOn.ToString("yyyy-MM-dd HH:mm")</td>
                                 <td>@item.UpdatedBy</td>
+                            <td><a asp-action="EditApplicationInventory" name="edit" asp-route-id="@item.AppInvId" class="btn btn-sm btn-danger">Edit</a></td>
+
                             </tr>
+
+
                         }
                     </tbody>
                 </table>
@@ -142,7 +105,7 @@
                     <ul class="pagination justify-content-center">
                         <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
                             <a class="page-link"
-                               asp-action="GetAll"
+                           asp-action="Index"
                                asp-route-FilterOn="@Context.Request.Query["FilterOn"]"
                                asp-route-filterQuery="@Context.Request.Query["filterQuery"]"
                                asp-route-pagenumber="1">First</a>
@@ -150,7 +113,8 @@
 
                         <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
                             <a class="page-link"
-                               asp-action="GetAll"
+                           asp-action="Index
+"
                                asp-route-FilterOn="@Context.Request.Query["FilterOn"]"
                                asp-route-filterQuery="@Context.Request.Query["filterQuery"]"
                                asp-route-pagenumber="@(Model.CurrentPage - 1)">Previous</a>
@@ -160,7 +124,7 @@
                         {
                             <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
                                 <a class="page-link"
-                                   asp-action="GetAll"
+                               asp-action="Index"
                                    asp-route-FilterOn="@Context.Request.Query["FilterOn"]"
                                    asp-route-filterQuery="@Context.Request.Query["filterQuery"]"
                                    asp-route-pagenumber="@i">@i</a>
@@ -169,7 +133,7 @@
 
                         <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
                             <a class="page-link"
-                               asp-action="GetAll"
+                           asp-action="Index"
                                asp-route-FilterOn="@Context.Request.Query["FilterOn"]"
                                asp-route-filterQuery="@Context.Request.Query["filterQuery"]"
                                asp-route-pagenumber="@(Model.CurrentPage + 1)">Next</a>
@@ -177,7 +141,7 @@
 
                         <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
                             <a class="page-link"
-                               asp-action="GetAll"
+                           asp-action="Index"
                                asp-route-FilterOn="@Context.Request.Query["FilterOn"]"
                                asp-route-filterQuery="@Context.Request.Query["filterQuery"]"
                                asp-route-pagenumber="@Model.TotalPages">Last</a>
